@@ -386,7 +386,7 @@ export const HomePage = ({ onOpenCart }) => {
         )}
 
         {/* Canteen Filter Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none pt-1">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar overscroll-x-contain touch-pan-x pt-1">
           <button
             onClick={() => setSelectedCanteenId(null)}
             className={`px-3.5 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer ${
@@ -482,7 +482,7 @@ export const HomePage = ({ onOpenCart }) => {
           )}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {filteredItems.map((item) => {
             const qtyInCart = getItemQuantityInCart(item.id);
             const isAvailable = Boolean(item.is_available);

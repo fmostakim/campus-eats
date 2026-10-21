@@ -30,7 +30,7 @@ function AppContent({ isCartOpen, setIsCartOpen }) {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar onOpenCart={() => setIsCartOpen(true)} />
       
-      <main className="flex-1">
+      <main className="flex-1 pb-24 sm:pb-8">
         <Routes>
           {/* Public Auth Routes */}
           <Route path="/login" element={<Login />} />

@@ -293,10 +293,10 @@ export const Navbar = ({ onOpenCart }) => {
 
       {/* Guest Mobile Bottom Bar */}
       {!user && (
-        <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 py-2 px-6 flex items-center justify-around shadow-lg">
+        <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-100 pt-2 pb-[max(0.6rem,env(safe-area-inset-bottom))] px-6 flex items-center justify-around shadow-xl">
           <Link
             to="/"
-            className={`flex flex-col items-center gap-1 text-xs font-semibold ${
+            className={`flex flex-col items-center gap-1 text-xs font-semibold active:scale-90 transition-transform ${
               location.pathname === '/' ? 'text-orange-500' : 'text-gray-400'
             }`}
           >
@@ -341,10 +341,10 @@ export const Navbar = ({ onOpenCart }) => {
 
       {/* Customer Mobile Bottom Bar */}
       {user && user.role === 'user' && (
-        <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 py-2 px-4 flex items-center justify-around shadow-lg">
+        <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-100 pt-2 pb-[max(0.6rem,env(safe-area-inset-bottom))] px-4 flex items-center justify-around shadow-xl">
           <Link
             to="/"
-            className={`flex flex-col items-center gap-1 text-xs font-semibold ${
+            className={`flex flex-col items-center gap-1 text-xs font-semibold active:scale-90 transition-transform ${
               location.pathname === '/' ? 'text-orange-500' : 'text-gray-400'
             }`}
           >

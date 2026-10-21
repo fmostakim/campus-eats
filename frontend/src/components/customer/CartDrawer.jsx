@@ -151,8 +151,8 @@ export const CartDrawer = ({ isOpen, onClose }) => {
       />
 
       {/* Drawer */}
-      <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+      <div className="absolute inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
+        <div className="w-screen sm:max-w-md bg-white shadow-2xl flex flex-col h-full safe-bottom">
           {/* Header */}
           <div className="p-4 sm:p-6 border-b border-gray-100 flex items-center justify-between bg-orange-50/50">
             <div className="flex items-center gap-2">
