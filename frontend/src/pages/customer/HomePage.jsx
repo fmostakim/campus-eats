@@ -224,10 +224,10 @@ export const HomePage = ({ onOpenCart }) => {
               <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search dishes, ingredients, or descriptions..."
+                placeholder="Search dishes, ingredients..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-8 py-2.5 bg-white border border-gray-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-2xs"
+                className="w-full pl-9 pr-8 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-2xs"
               />
               {searchTerm && (
                 <button
@@ -243,7 +243,7 @@ export const HomePage = ({ onOpenCart }) => {
             {/* Filter Toggle Button */}
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`px-3 py-2.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
+              className={`px-3.5 py-2.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 active:scale-95 ${
                 showFilters || maxPrice || minRating || onlyWithReviews || (sortBy !== 'default' && sortBy !== 'price_rating_asc')
                   ? 'bg-orange-500 text-white border-orange-500 shadow-xs'
                   : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
@@ -262,17 +262,17 @@ export const HomePage = ({ onOpenCart }) => {
         {/* Filter & Sort Controls Panel */}
         {(showFilters || searchTerm || maxPrice || minRating || onlyWithReviews) && (
           <div className="bg-white p-3.5 sm:p-4 rounded-2xl border border-gray-200/90 shadow-2xs space-y-3">
-            <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:flex-wrap justify-between gap-3 text-xs">
               {/* Sort By Dropdown */}
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-gray-700 flex items-center gap-1">
+              <div className="flex items-center justify-between sm:justify-start gap-2 w-full sm:w-auto">
+                <span className="font-bold text-gray-700 flex items-center gap-1 shrink-0">
                   <ArrowUpDown className="w-3.5 h-3.5 text-gray-400" />
                   Sort:
                 </span>
                 <select
                   value={activeSort}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer text-gray-800"
+                  className="flex-1 sm:flex-initial px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer text-gray-800"
                 >
                   <option value="price_rating_asc">Price & Rating: Low to High (Default)</option>
                   <option value="price_asc">Price: Lowest to Highest</option>
@@ -284,9 +284,9 @@ export const HomePage = ({ onOpenCart }) => {
               </div>
 
               {/* Price Filter Options */}
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-bold text-gray-700">Max Price:</span>
-                <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+                <span className="font-bold text-gray-700 shrink-0">Max Price:</span>
+                <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5 max-w-full">
                   {[
                     { label: 'Any', val: '' },
                     { label: '≤ 35', val: '35' },
@@ -296,7 +296,7 @@ export const HomePage = ({ onOpenCart }) => {
                     <button
                       key={p.label}
                       onClick={() => setMaxPrice(maxPrice === p.val ? '' : p.val)}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer shrink-0 active:scale-95 ${
                         maxPrice === p.val
                           ? 'bg-orange-500 text-white border-orange-500 shadow-2xs'
                           : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
@@ -305,7 +305,7 @@ export const HomePage = ({ onOpenCart }) => {
                       {p.label} {p.val && <span className="text-[10px]">BDT</span>}
                     </button>
                   ))}
-                  <div className="relative w-20 ml-1">
+                  <div className="relative w-20 ml-1 shrink-0">
                     <input
                       type="number"
                       placeholder="Custom"
@@ -318,12 +318,12 @@ export const HomePage = ({ onOpenCart }) => {
               </div>
 
               {/* Review / Rating Filter Options */}
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-bold text-gray-700 flex items-center gap-1">
+              <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+                <span className="font-bold text-gray-700 flex items-center gap-1 shrink-0">
                   <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
                   Review:
                 </span>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5 max-w-full">
                   {[
                     { label: 'All', val: '' },
                     { label: '4★+', val: '4' },
@@ -332,7 +332,7 @@ export const HomePage = ({ onOpenCart }) => {
                     <button
                       key={r.label}
                       onClick={() => setMinRating(minRating === r.val ? '' : r.val)}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer shrink-0 active:scale-95 ${
                         minRating === r.val
                           ? 'bg-amber-500 text-white border-amber-500 shadow-2xs'
                           : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
@@ -343,7 +343,7 @@ export const HomePage = ({ onOpenCart }) => {
                   ))}
                   <button
                     onClick={() => setOnlyWithReviews(!onlyWithReviews)}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ml-1 ${
+                    className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ml-1 shrink-0 active:scale-95 ${
                       onlyWithReviews
                         ? 'bg-amber-100 text-amber-900 border-amber-300 font-black shadow-2xs'
                         : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
@@ -364,7 +364,7 @@ export const HomePage = ({ onOpenCart }) => {
                     setOnlyWithReviews(false);
                     setSortBy('default');
                   }}
-                  className="text-xs font-bold text-red-600 hover:underline cursor-pointer ml-auto"
+                  className="text-xs font-bold text-red-600 hover:underline cursor-pointer sm:ml-auto"
                 >
                   Reset Filters
                 </button>

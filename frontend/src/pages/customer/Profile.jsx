@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api/client';
 import { useAuth } from '../../context/AuthContext';
 import { 
@@ -17,12 +17,15 @@ import {
   ChevronRight,
   Utensils,
   ShoppingBag,
-  RotateCcw
+  RotateCcw,
+  LogOut
 } from 'lucide-react';
 import { ReviewModal } from '../../components/customer/ReviewModal';
 
 export const Profile = () => {
-  const { user, reloadProfile } = useAuth();
+  const { user, reloadProfile, logout } = useAuth();
+  const navigate = useNavigate();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [budgetLimit, setBudgetLimit] = useState(user?.daily_budget_limit || 0);
   const [notifications, setNotifications] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -384,6 +387,63 @@ export const Profile = () => {
           </div>
         )}
       </div>
+
+      {/* Account Logout Action (Particularly convenient on mobile) */}
+      <div className="pt-2">
+        <button
+          type="button"
+          onClick={() => setShowLogoutConfirm(true)}
+          className="w-full py-3.5 px-4 bg-red-50 hover:bg-red-100 border border-red-200 text-red-600 font-bold rounded-2xl text-xs flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-xs active:scale-95"
+        >
+          <LogOut className="w-4 h-4" />
+          <span>Log Out of CampusEats</span>
+        </button>
+      </div>
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutConfirm && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 animate-fade-in"
+          onClick={() => setShowLogoutConfirm(false)}
+        >
+          <div 
+            className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-gray-100 text-center transform transition-all animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-14 h-14 rounded-2xl bg-red-50 text-red-500 flex items-center justify-center mx-auto mb-4 shadow-sm border border-red-100">
+              <LogOut className="w-7 h-7" />
+            </div>
+            
+            <h3 className="text-lg font-black text-gray-900 mb-1">
+              Log out of CampusEats?
+            </h3>
+            <p className="text-xs text-gray-500 mb-6 leading-relaxed">
+              Are you sure you want to log out? You will need to sign in again to place orders and manage your account.
+            </p>
+
+            <div className="grid grid-cols-2 gap-3 font-bold text-xs">
+              <button
+                type="button"
+                onClick={() => setShowLogoutConfirm(false)}
+                className="py-3 px-4 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowLogoutConfirm(false);
+                  logout();
+                  navigate('/login');
+                }}
+                className="py-3 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white shadow-md shadow-red-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                Yes, Log Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Review Submission Modal */}
       <ReviewModal

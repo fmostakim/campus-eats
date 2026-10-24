@@ -101,15 +101,15 @@ export const Navbar = ({ onOpenCart }) => {
                     </Link>
 
                     {/* Loyalty Points Pill */}
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-amber-50 border border-amber-200 text-amber-800 rounded-full text-xs font-bold shadow-xs">
+                    <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 bg-amber-50 border border-amber-200 text-amber-800 rounded-full text-xs font-bold shadow-xs">
                       <Award className="w-3.5 h-3.5 text-amber-600" />
-                      <span>{user.loyalty_points || 0} pts</span>
+                      <span>{user.loyalty_points || 0} <span className="hidden xs:inline">pts</span></span>
                     </div>
 
-                    {/* Compare Trigger */}
+                    {/* Compare Trigger - Visible on desktop, accessible via bottom nav on mobile */}
                     <button
                       onClick={openCompareModal}
-                      className="relative p-2.5 rounded-full bg-orange-50 hover:bg-orange-100 text-orange-600 transition-colors flex items-center justify-center cursor-pointer"
+                      className="hidden sm:flex relative p-2.5 rounded-full bg-orange-50 hover:bg-orange-100 text-orange-600 transition-colors items-center justify-center cursor-pointer"
                       title="Compare Dishes"
                     >
                       <ArrowLeftRight className="w-5 h-5" />
@@ -221,10 +221,10 @@ export const Navbar = ({ onOpenCart }) => {
                   )}
                 </div>
 
-                {/* Profile Link */}
+                {/* Profile Link - Visible on desktop, accessible via bottom nav on mobile */}
                 <Link
                   to="/profile"
-                  className={`p-2 rounded-full transition-colors ${
+                  className={`hidden sm:flex p-2 rounded-full transition-colors ${
                     location.pathname === '/profile'
                       ? 'bg-gray-200 text-gray-900'
                       : 'text-gray-600 hover:bg-gray-100'
@@ -245,10 +245,10 @@ export const Navbar = ({ onOpenCart }) => {
               </>
             ) : (
               <div className="flex items-center gap-2 sm:gap-3">
-                {/* Guest Compare Trigger */}
+                {/* Guest Compare Trigger - Visible on desktop, accessible via bottom nav on mobile */}
                 <button
                   onClick={openCompareModal}
-                  className="relative p-2.5 rounded-full bg-orange-50 hover:bg-orange-100 text-orange-600 transition-colors flex items-center justify-center cursor-pointer"
+                  className="hidden sm:flex relative p-2.5 rounded-full bg-orange-50 hover:bg-orange-100 text-orange-600 transition-colors items-center justify-center cursor-pointer"
                   title="Compare Dishes"
                 >
                   <ArrowLeftRight className="w-5 h-5" />
